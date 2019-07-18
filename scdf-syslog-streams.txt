@@ -1,0 +1,58 @@
+#Ensure latest apps are loaded
+app import https://dataflow.spring.io/rabbitmq-maven-latest
+
+#Create PAS complete syslog connector - named destination :PAS-SYSLOG
+stream create --name "PAS-CONNECTOR" --definition "syslog --rfc=5424 --port=51514 > :PAS-SYSLOG" --deploy
+#Test PAS-SYSLOG stream - undeploy after testing
+stream create --name "TEST-PAS-SYSLOG" --definition ":PAS-SYSLOG > log" 
+
+#Create PAS-CloudController-Log named stream: PAS-CC-SYSLOG
+stream create --name "PAS-CC-SYSLOG" --definition ":PAS-SYSLOG  > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='cloud_controller_ng' > :PAS-CC-SYSLOG" --deploy
+#Create PAS cloud controller syslog test - undeploy after testing
+stream create --name "TEST-PAS-CC-SYSLOG" --definition ":PAS-CC-SYSLOG > log" 
+
+#Create PAS-Uaa-Log named stream: PAS-UAA-SYSLOG
+stream create --name "PAS-UAA-SYSLOG" --definition ":PAS-SYSLOG  > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='uaa' > :PAS-UAA-SYSLOG" --deploy
+#Create PAS UAA syslog test - undeploy after testing
+stream create --name "TEST-PAS-UAA-SYSLOG" --definition ":PAS-UAA-SYSLOG > log" 
+
+#Create PAS-GoRouter-Log named stream: PAS-GOROUTER-SYSLOG
+stream create --name "PAS-GOROUTER-SYSLOG" --definition ":PAS-SYSLOG  > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='gorouter' > :PAS-GOROUTER-SYSLOG" --deploy
+#Create PAS GOROUTER syslog test - undeploy after testing
+stream create --name "TEST-PAS-GOROUTER-SYSLOG" --definition ":PAS-GOROUTER-SYSLOG > log" 
+
+#Create PAS-kernel-Log named stream: PAS-KERNEL-SYSLOG - e.g. for logging outbound tcp connections from deployed PAS applications
+stream create --name "PAS-KERNEL-SYSLOG" --definition ":PAS-SYSLOG  > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='kernel' > :PAS-KERNEL-SYSLOG" --deploy
+#Create PAS KERNEL syslog test - undeploy after testing
+stream create --name "TEST-PAS-KERNEL-SYSLOG" --definition ":PAS-KERNEL-SYSLOG > log" 
+
+#Create kernel stream containing only the "syslog_MESSAGE"
+stream create --name "PAS-KERNEL-SYSLOG-MESSAGE" --definition ":PAS-KERNEL-SYSLOG > transform --transformer.expression=#jsonPath(payload,'.syslog_MESSAGE') > :PAS-KERNEL-SYSLOG-MESSAGE" --deploy
+#Create PAS KERNEL SYSLOG MESSAGE test - undeploy after testing
+stream create --name "TEST-PAS-KERNEL-SYSLOG-MESSAGE" --definition ":PAS-KERNEL-SYSLOG-MESSAGE > log" 
+
+#Drain named destination/stream to file (demo use only - cf ssh into sink AI to see file content)
+stream create --name "PAS-KERNEL-SYSLOG-MESSAGE-FILE-TEST" --definition ":PAS-KERNEL-SYSLOG-MESSAGE > file --file.mode=APPEND --file.directory=/home/vcap/files/" --deploy
+
+#Drain list of all observed application names to file in sink AI
+stream create --name "PAS-APPS-TO-FILE-TEST" --definition ":PAS-SYSLOG > transform --transformer.expression=#jsonPath(payload,'.syslog_APP_NAME') | file --file.mode=APPEND --file.directory=/home/vcap/files/" --deploy
+
+
+#Create BOSH complete syslog connector - named destination :BOSH-SYSLOG
+stream create --name "BOSH-CONNECTOR" --definition "syslog --rfc=5424 --port=51516 > :BOSH-SYSLOG" --deploy
+#Test BOSH-SYSLOG stream - undeploy after testing
+stream create --name "TEST-BOSH-SYSLOG" --definition ":BOSH-SYSLOG > log" 
+
+#Create MYSQL complete syslog connector - named destination :MYSQL-SYSLOG
+stream create --name "MYSQL-CONNECTOR" --definition "syslog --rfc=5424 --port=51515 > :MYSQL-SYSLOG" --deploy
+#Test MYSQL-SYSLOG stream - undeploy after testing
+stream create --name "TEST-MYSQL-SYSLOG" --definition ":MYSQL-SYSLOG > log" 
+
+
+#If problems occur adding TCP routes to syslog sinks, deploy them first before all other streams and update them with the addAppPort.sh script
+#stream create --name "PAS-CONNECTOR" --definition "syslog --rfc=5424 --port=51514 > :PAS-SYSLOG" --deploy
+#stream create --name "BOSH-CONNECTOR" --definition "syslog --rfc=5424 --port=51516 > :BOSH-SYSLOG" --deploy
+#stream create --name "MYSQL-CONNECTOR" --definition "syslog --rfc=5424 --port=51515 > :MYSQL-SYSLOG" --deploy
+
+~
+~
