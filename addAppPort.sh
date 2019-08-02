@@ -6,6 +6,24 @@ if [ "$#" -ne 4 ];
 fi
 
 
+######################################################################################################
+# search for route with passed in listen port, return it's GUID if found or null if not.
+# iterates through pages of results
+function getRouteGuidWithPort() {
+  port=$1
+  totalpages=$(cf curl /v2/routes?results-per-page=100 | jq -r .total_pages)
+  for (( i = 1; i <= $totalpages; i++ )) do
+  result=$(cf curl /v2/routes?order-direction=asc\&page=$i\&results-per-page=100 | jq -r ".resources[] | select(.entity.port==$port)" | jq -r .metadata.guid)
+  if [ ! -z $result ]
+    then
+      echo $result
+      return
+      #break
+  fi
+  done
+}
+######################################################################################################
+
 
 # app name is $1
 appname=$1
@@ -42,7 +60,8 @@ cf create-route $space $domain --port $port
 sleep 2
 
 # need route guid
-routeguid=$(cf curl /v2/routes | jq -r ".resources[] | select(.entity.port==$2)" | jq -r .metadata.guid)
+#routeguid=$(cf curl /v2/routes?results-per-page=100 | jq -r ".resources[] | select(.entity.port==$2)" | jq -r .metadata.guid)
+routeguid=$(getRouteGuidWithPort $port)
 echo "route guid = $routeguid"
 echo
 
@@ -51,3 +70,7 @@ cf curl /v2/route_mappings -X POST -d "'"$postdata"'"
 sleep 2
 
 cf restage $appname
+
+
+
+
