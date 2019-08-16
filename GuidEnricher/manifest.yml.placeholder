@@ -1,0 +1,9 @@
+---
+applications:
+- name: GuidEnricher
+  memory: 1024M
+  env:
+    cfapi: <CF API ENDPOINT>
+    cfuser: <admin-read user>
+    cfpass: <admin-read password>
+    JBP_CONFIG_OPEN_JDK_JRE: "{ jre: { version: 11.+ }}"
