@@ -61,7 +61,6 @@ cf create-route $domain --port $port
 sleep 2
 
 # need route guid
-#routeguid=$(cf curl /v2/routes?results-per-page=100 | jq -r ".resources[] | select(.entity.port==$2)" | jq -r .metadata.guid)
 ####routeguid=$(getRouteGuidWithPort $port)
 routeguid=$(cf curl /v2/routes?results-per-page=100 | jq -r ".resources[] | select(.entity.port==51000)" | jq -r .metadata.guid)
 
@@ -69,16 +68,10 @@ routeguid=$(cf curl /v2/routes?results-per-page=100 | jq -r ".resources[] | sele
 echo "route guid = $routeguid"
 echo
 
-### cf curl /v2/route_mappings -X POST -d '{"app_guid": "b6923ebd-2204-405a-b0d1-f81da59dd2e7", "route_guid":"d58f1275-0431-47c2-a158-0d536b46be1a","app_port":51000}'
 postdata="{\"app_guid\": \"$appguid\",\"route_guid\": \"$routeguid\",\"app_port\": $port}"
 
-#echo This works
-#echo cf curl /v2/route_mappings -X POST -d '{"app_guid":"286ac479-7dc9-4caa-96bc-0c351cfa868e","route_guid":"9170e08f-6650-4022-a4ff-096f7bcb598e","app_port":51000}'
 
 
-#echo postdata = "$postdata"
-###cf curl /v2/route_mappings -X POST -d "'"$postdata"'"
-#echo cf curl /v2/route_mappings -X POST -d "'"$postdata"'"
 cf curl /v2/route_mappings -X POST -d "$postdata"
 sleep 2
 
