@@ -11,9 +11,9 @@ fi
 # iterates through pages of results
 function getRouteGuidWithPort() {
   port=$1
-  totalpages=$(cf curl /v2/routes?results-per-page=100 | jq -r .total_pages)
+  totalpages=$(cf curl /v2/routes | jq -r .total_pages)
   for (( i = 1; i <= $totalpages; i++ )) do
-  result=$(cf curl /v2/routes?order-direction=asc\&page=$i\&results-per-page=100 | jq -r ".resources[] | select(.entity.port==$port)" | jq -r .metadata.guid)
+  result=$(cf curl /v2/routes?order-direction=asc\&page=$i | jq -r ".resources[] | select(.entity.port==$port)" | jq -r .metadata.guid)
   if [ ! -z $result ]
     then
       echo $result
@@ -61,8 +61,8 @@ cf create-route $domain --port $port
 sleep 2
 
 # need route guid
-####routeguid=$(getRouteGuidWithPort $port)
-routeguid=$(cf curl /v2/routes?results-per-page=100 | jq -r ".resources[] | select(.entity.port==51000)" | jq -r .metadata.guid)
+routeguid=$(getRouteGuidWithPort $port)
+###routeguid=$(cf curl /v2/routes | jq -r ".resources[] | select(.entity.port==51000)" | jq -r .metadata.guid)
 
 ###### cf curl /v2/routes?results-per-page=100 | jq '.resources[] | select(.entity.port==51000)
 echo "route guid = $routeguid"
