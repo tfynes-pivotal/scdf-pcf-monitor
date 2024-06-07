@@ -5,6 +5,7 @@ if [ "$#" -ne 4 ];
      echo "Usage addAppPort.sh <app-name> <app-port> <cf-space> <cf-tcp-domain>" && exit 1
 fi
 
+echo "debug arg count = $#"
 
 ######################################################################################################
 # search for route with passed in listen port, return it's GUID if found or null if not.
@@ -40,7 +41,8 @@ echo "domain = $domain"
 echo
 
 # need app guid
-appguid=$(cf app $1 --guid)
+appguid=$(cf app $appname --guid)
+#appguid=$(cf app $1 --guid)
 echo "app guid = $appguid"
 echo
 
