@@ -2,7 +2,7 @@
 
 if [ "$#" -ne 5 ];
   then
-     echo "Usage deploySyslogToLogComplete.sh <dataflow-service-name> <stream-name> <syslog-port> <cf-space> <cf-tcp-domain>" && exit 1
+     echo "Usage deploySyslogSource.sh <dataflow-service-name> <stream-name> <syslog-port> <cf-space> <cf-tcp-domain>" && exit 1
 fi
 
 dfservice=$1
@@ -21,7 +21,7 @@ echo "domain = $domain"
 echo
 
 cf dfsh $dfservice <<EOF
-stream create --name $streamname --definition "syslog --rfc=5424 --port=$port | log"
+stream create --name $streamname --definition "syslog --rfc=5424 --port=$port > : cf-syslog"
 stream deploy $streamname --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
 quit
 EOF
