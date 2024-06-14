@@ -20,9 +20,11 @@ domain=$5
 echo "domain = $domain"
 echo
 
+#WIP CF deployer not picking up required env update
+#stream deploy $streamname --properties "deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false, deployer.*.cloudfoundry.env='JAVA_OPTS=\'-Xmx64m -Xms64m\'', deployer.*.disk=512, deployer.*.memory=256"
 cf dfsh $dfservice <<EOF
-stream create --name $streamname --definition "syslog --rfc=5424 --port=$port > : cf-syslog"
-stream deploy $streamname --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+stream create --name $streamname --definition "syslog --rfc=5424 --port=$port > : $streamname"
+stream deploy $streamname --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
 quit
 EOF
 echo
