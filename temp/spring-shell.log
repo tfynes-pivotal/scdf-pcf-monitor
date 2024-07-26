@@ -1,0 +1,22 @@
+// dataflow 1.2.0.RELEASE log opened at 2019-08-27 17:42:52
+stream list
+stream deploy pisgtest
+// [failed] stream deploy egresstest
+quit
+// dataflow 1.2.0.RELEASE log closed at 2019-08-27 17:43:34
+// dataflow 1.2.0.RELEASE log opened at 2019-08-27 17:46:08
+stream list
+quit
+// dataflow 1.2.0.RELEASE log closed at 2019-08-27 17:46:22
+// dataflow 1.2.0.RELEASE log opened at 2019-08-27 17:48:00
+stream list
+stream undeploy pisgtest
+stream deploy pisgtest
+quit
+// dataflow 1.2.0.RELEASE log closed at 2019-08-27 17:49:41
+// dataflow 1.2.0.RELEASE log opened at 2019-08-27 18:10:52
+stream list
+stream undeploy pisgtest
+stream deploy pisgtest
+quit
+// dataflow 1.2.0.RELEASE log closed at 2019-08-27 18:13:36

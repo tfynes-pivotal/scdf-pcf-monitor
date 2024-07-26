@@ -1,0 +1,8 @@
+---
+applications:
+ - name: EgressFieldFormatter
+   memory: 16M
+   disk_quota: 16M
+   buildpacks:
+     - staticfile_buildpack
+

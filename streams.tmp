@@ -1,0 +1,5 @@
+stream list
+stream create --name "iptables-logger-test" --definition ":iptables-logger-syslog > log"
+stream deploy "iptables-logger-test"
+stream list
+quit

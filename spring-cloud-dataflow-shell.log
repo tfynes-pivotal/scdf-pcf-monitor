@@ -1,0 +1,875 @@
+1717079246553:exit
+1717083303440:stream create --name "tas-uaa-syslog" --definition ":tas-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='uaa'" > :tas-uaa-syslog
+1717083771153:tream create --name ts2 --definition ":tas-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='cloud_controller_ng'" > log
+1717083791605:stream create --name ts2 --definition ":tas-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='cloud_controller_ng'" > log
+1717083818461:stream create --name ts2 --definition ":tas-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='cloud_controller_ng' > log"
+1717083897913:stream create --name ts2 --definition ":tas-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='cloud_controller_ng' | log"
+1717083902517:stream deploy ts2
+1717084046089:stream undeploy ts2
+1717085539641:stream slist
+1717085541788:stream list
+1717085779730:stream destroy ts2
+1717085868738:stream create --name tanzu-uaa-syslog-connector --definition ":tas-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_MESSAGE') > :tas-uaa-syslog" --deploy
+1717085971084:exit
+1717087712734:strem list
+1717087714685:stream list
+1717099110729:stream create --name "tas-cc-transform" --definition ":tas-cc-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_MESSAGE') | log" --deploy
+1717102147364:quit
+1717433165034:stream create --name "tas-syslog" --definition "syslog --rfc=5424 --port=51514 > :tas-syslog" --deploy
+1717433178663:stream create --name "tas-syslog-tester" --definition ":tas-syslog > log" --deploy
+1717433183271:stream create --name "tas-cc-syslog" --definition ":tas-syslog  > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='cloud_controller_ng' > :tas-cc-syslog" --deploy
+1717433189592:stream create --name "tas-cc-syslog-tester" --definition ":tas-cc-syslog > log" --deploy
+1717433198020:stream create --name "tas-cc-transform" --definition ":tas-cc-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_MESSAGE') | log" --deploy
+1717711308122:stream create --name s2l --definition "syslog --syslog.rfc=5424 --syslog.port=5100 | log" --deploy
+1717711380554:exit
+1717765830156:stream create -h
+1717765835658:?
+1717765838044:help stream
+1717765839716:stream
+1717770142272:stream list
+1717770147569:stream destroy test1
+1717770170158:quit
+1717770457146:stream list
+1717770462513:stream destroy testa
+1717771751238:quit
+1717772153317:stream list
+1717772197832:quit
+1717772313766:stream create --name syslog2log --definition "syslog --syslog.rfc=5424 --syslog.port=51000 | log"
+1717772314864:stream deploy syslog2log --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717772321780:quit
+1717772475771:stream list
+1717772479708:stream destroy syslog2log
+1717772515920:quit
+1717772796447:stream create --name syslog2log --definition "syslog --syslog.rfc=5424 --syslog.port=51000 | log"
+1717772796888:stream deploy syslog2log --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717772802796:quit
+1717772913896:stream list
+1717772916956:stream destroy syslog2log
+1717772919361:quit
+1717773094298:stream create --name syslog2log2 --definition "syslog --syslog.rfc=5424 --syslog.port=51000 | log"
+1717773094677:stream deploy syslog2log2 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717773100782:quit
+1717773641245:stream create --name syslog2log2 --definition "syslog --syslog.rfc=5424 --syslog.port=51000 | log"
+1717773641614:stream deploy syslog2log2 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717773647557:quit
+1717773769170:stream create --name syslog2log3 --definition "syslog --syslog.rfc=5424 --syslog.port=51001 | log"
+1717773769568:stream deploy syslog2log3 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717773777964:quit
+1717773998632:stream create --name syslog2log4 --definition "syslog --syslog.rfc=5424 --syslog.port=51004 | log"
+1717773999110:stream deploy syslog2log4 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717774013769:quit
+1717774393650:stream create --name syslog2log5 --definition "syslog --syslog.rfc=5424 --syslog.port=51005 | log"
+1717774394417:stream deploy syslog2log5 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717774412253:quit
+1717774489593:stream create --name syslog2log5 --definition "syslog --syslog.rfc=5424 --syslog.port=51005 | log"
+1717774490036:stream deploy syslog2log5 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717774492058:quit
+1717774593413:stream create --name syslog2log5 --definition "syslog --syslog.rfc=5424 --syslog.port=51005 | log"
+1717774593739:stream deploy syslog2log5 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717774601122:quit
+1717774779192:stream create --name syslog2log1 --definition "syslog --syslog.rfc=5424 --syslog.port=51001 | log"
+1717774779557:stream deploy syslog2log1 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717774783692:quit
+1717774904919:stream create --name syslog2log2 --definition "syslog --syslog.rfc=5424 --syslog.port=51002 | log"
+1717774905302:stream deploy syslog2log2 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717774908635:quit
+1717775032214:stream create --name syslog2log3 --definition "syslog --syslog.rfc=5424 --syslog.port=51003 | log"
+1717775032735:stream deploy syslog2log3 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717775044950:quit
+1717775273727:stream create --name syslog2log3 --definition "syslog --syslog.rfc=5424 --syslog.port=51003 | log"
+1717775274186:stream deploy syslog2log3 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717775276178:quit
+1717775293374:stream create --name syslog2log4 --definition "syslog --syslog.rfc=5424 --syslog.port=51004 | log"
+1717775293868:stream deploy syslog2log4 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717775303082:quit
+1717775378631:stream create --name syslog2log5 --definition "syslog --syslog.rfc=5424 --syslog.port=51005 | log"
+1717775379080:stream deploy syslog2log5 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717775386352:quit
+1717775572875:stream create --name syslog2log6 --definition "syslog --syslog.rfc=5424 --syslog.port=51006 | log"
+1717775573345:stream deploy syslog2log6 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717775578262:quit
+1717775828147:stream create --name syslog2log1 --definition "syslog --syslog.rfc=5424 --syslog.port=51001 | log"
+1717775828574:stream deploy syslog2log1 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717775834624:quit
+1717776049066:stream create --name syslog2log --definition "syslog --syslog.rfc=5424 --syslog.port=51000 | log"
+1717776049431:stream deploy syslog2log --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717776057059:quit
+1717776282881:stream create --name syslog2log --definition "syslog --syslog.rfc=5424 --syslog.port=51000 | log"
+1717776283294:stream deploy syslog2log --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717776289710:quit
+1717776891215:stream list
+1717776892304:stream destroy syslog2log
+1717776893355:stream list
+1717776897764:quit
+1717776987892:stream create --name sys2log --definition "syslog --syslog.rfc=5424 --syslog.port=51000 | log"
+1717776988291:stream deploy sys2log --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717776995683:quit
+1717777321649:stream destroy s
+1717777322046:stream destroy sys2log
+1717777324426:stream list
+1717777327193:quit
+1717777377689:stream create --name syslog2log --definition "syslog --syslog.rfc=5424 --syslog.port=51000 | log"
+1717777378061:stream deploy syslog2log --properties "deployer.*.memory=1024"
+1717777385788:#stream deploy syslog2log --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717777385793:quit
+1717777608758:stream destroy syslog2log
+1717777612636:stream list
+1717777614784:quit
+1717789621813:stream create --name s2l --definition "syslog --syslog.rfc=5424 --syslog.port=51000 | log"
+1717789622376:stream deploy s2l --properties "deployer.*.memory=1024"
+1717789633320:#stream deploy s2l --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717789633328:quit
+1717790458952:stream destroy s2l
+1717790462729:stream list
+1717790470581:quit
+1717790583767:stream create --name s2l2 --definition "syslog --syslog.rfc=5424 --syslog.port=51000 | log"
+1717790584148:stream deploy s2l2 --properties "deployer.*.memory=1024"
+1717790593061:quit
+1717790921468:streamm list
+1717790921474:stream list
+1717790928194:stream destroy s2l2
+1717790930804:stream list
+1717790932974:quit
+1717790998389:stream create --name s2l --definition "syslog --rfc=5424 --port=51000 | log"
+1717790998805:stream deploy s2l --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717791006031:quit
+1717791322956:stream destroy s2l
+1717791395671:stream list
+1717791420312:stream create --name s --definition "syslog --rfc=5424 --port=51000 | log"
+1717791420721:stream deploy s --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1717791427790:quit
+1717791437410:quit
+1717791625736:stream list
+1717791626348:stream destroy s
+1717791738902:quit
+1718025042036:stream create --name s2l --definition "syslog --rfc=5424 --port=51000 | log"
+1718025042752:stream deploy s2l --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1718025056002:quit
+1718025414467:stream create --name s2l2 --definition "syslog --rfc=5424 --port=51000 | log"
+1718025414931:stream deploy s2l2 --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1718025423609:quit
+1718026544583:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718026545032:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1718026549365:quit
+1718043261816:stream list
+1718044852917:quit
+1718052232763:stream list
+1718052270734:stream destroy cclog
+1718052273083:quit
+1718112369533:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718112370057:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718112374743:quit
+1718112537511:stream create --name test --definition ":cf-syslog > log"
+1718112567076:stream deploy test --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718112593385:cf apps | grep test
+1718112597703:quit
+1718113715101:stream create --name appnames --definition ":cf-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_APP_NAME')" | log
+1718113746228:stream create --name appnames --definition ":cf-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_APP_NAME')" > log
+1718114229202:quit
+1718114551080:stream create --name appNames --definition ":cf-syslog > transform --tranformer.expression=#jsonPath(payload,'.syslog_APP_NAME') > file --file.mode=APPEND --file.directory=/home/vcap/files/"
+1718114611512:stream create --name appNames --definition ":cf-syslog > transform --tranformer.expression=#jsonPath(payload,'.syslog_APP_NAME')" > file --file.mode=APPEND --file.directory=/home/vcap/files/
+1718114651785:stream create --name appNames --definition ":cf-syslog > transform --tranformer.expression=#jsonPath(payload,'.syslog_APP_NAME') > file --file.mode=APPEND --file.directory=/home/vcap/files/"
+1718114705500:stream create --name appNames --definition ":cf-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_APP_NAME') > file --file.mode=APPEND --file.directory=/home/vcap/files/"
+1718114790086:stream create --name appNames --definition ":cf-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_APP_NAME') | file --file.mode=APPEND --file.directory=/home/vcap/files/"
+1718116249552:stream create --name uaa-syslog --definition :cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==uaa > :uaa-syslog
+1718116249585:stream deploy uaa-syslog --properties deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false
+1718116504454:stream deploy uaa-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718116504847:stream create --name "vcap_nginx_access-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==vcap_nginx_access > :vcap_nginx_access-syslog"
+1718116574015:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==uaa > :uaa-syslog"
+1718116905133:stream list
+1718116923240:stream destroy uaatest
+1718116933643:stream destroy uaa-syslog
+1718116941371:stream destroy cf-syslog
+1718116943501:quit
+1718117192534:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718117192910:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718117196737:quit
+1718117792441:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==uaa > :uaa-syslog"
+1718118288667:stream deploy uaa-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718119058160:stream create --name appnames --definition ":cf-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_APP_NAME') > file --file.mode=APPEND --file.directory=/tmp/ --file.name=foo"
+1718119130786:y
+1718119207651:stream create --name appnames --definition ":cf-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_APP_NAME') | file --file.mode=APPEND --file.directory=/tmp/ --file.name=foo"
+1718120251633:stream deploy iptables-logger-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718120252127:stream create --name "iptables-logger-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==iptables-logger > :iptables-logger-syslog"
+1718120653374:stream list
+1718120669171:stream destroy uaa-syslog
+1718120675554:stream destroy iptables-logger-syslog
+1718120678570:stream list
+1718120680409:quit
+1718120696968:stream create --name "iptables-logger-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==iptables-logger > :iptables-logger-syslog"
+1718120697424:stream deploy "iptables-logger-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718121320843:stream list
+1718121490425:stream
+1718121494321:stream help
+1718121495763:quit
+1718132746813:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718132747221:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718132750162:quit
+1718134391067:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718134391452:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718134394613:quit
+1718139584667:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718139585448:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718139591107:quit
+1718201590741:stream list
+1718202308975:quit
+1718394429553:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718394429974:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718394434313:quit
+1718394821465:clear
+1718394821700:stream list
+1718394826984:stream destroy cf-syslog
+1718394833944:stream destroy cf-syslog -f
+1718394898245:stream list
+1718394906733:stream destroy cf-syslog --force
+1718394913876:stream destroy cf-syslog -f
+1718394920276:quit
+1718395191478:stream list
+1718395229635:stream destroy cf-syslog
+1718395238228:clear
+1718395240545:stream list
+1718395250704:quit
+1718395294482:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718395295686:#stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718395295719:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false deployer.*.cloudfoundry.java-opts="-Xmx64m -Xms64m" deployer.*.disk=512 deployer.*.memory=256"
+1718395301583:quit
+1718396113048:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718396113427:#stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718396113444:stream deploy cf-syslog --properties "deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false deployer.*.cloudfoundry.java-opts='-Xmx64m -Xms64m' deployer.*.disk=512 deployer.*.memory=256"
+1718396116840:quit
+1718396232791:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718396233220:stream deploy cf-syslog --properties "deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false deployer.*.cloudfoundry.java-opts=\\"-Xmx64m -Xms64m\\" deployer.*.disk=512 deployer.*.memory=256"
+1718396234738:quit
+1718396256277:stream list
+1718396260785:stream destroy cf-syslog
+1718396287314:stream destroy cfsyslog-2-logdrain
+1718396288571:quit
+1718396308751:stream create --name cf-syslog2 --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718396309167:stream deploy cf-syslog2 --properties "deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false deployer.*.cloudfoundry.java-opts=\\"-Xmx64m -Xms64m\\" deployer.*.disk=512 deployer.*.memory=256"
+1718396309890:quit
+1718396398051:stream create --name cf-syslog2 --definition "syslog --rfc=5424 --port=51000 > : cf-syslog2"
+1718396398394:stream deploy cf-syslog2 --properties "deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false deployer.*.cloudfoundry.java-opts='-Xmx64m -Xms64m' deployer.*.disk=512 deployer.*.memory=256"
+1718396418835:stream create --name cf-syslog3 --definition "syslog --rfc=5424 --port=51000 > : cf-syslog3"
+1718396419235:stream deploy cf-syslog3 --properties "deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false deployer.*.cloudfoundry.java-opts='-Xmx64m -Xms64m' deployer.*.disk=512 deployer.*.memory=256"
+1718396421991:quit
+1718396518482:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718396519248:stream deploy cf-syslog --properties "deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false, deployer.*.cloudfoundry.java-opts='-Xmx64m -Xms64m', deployer.*.disk=512, deployer.*.memory=256"
+1718396523241:quit
+1718396761709:stream list
+1718396762772:stream destroy cf-syslog
+1718396764094:stream list
+1718396775849:quit
+1718396828265:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718396828655:stream deploy cf-syslog --properties "deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false, deployer.*.cloudfoundry.env='JAVA_OPTS=\\"-Xmx64m -Xms64m\\"', deployer.*.disk=512, deployer.*.memory=256"
+1718396829240:quit
+1718396878035:stream create --name cf-syslog2 --definition "syslog --rfc=5424 --port=51000 > : cf-syslog2"
+1718396878452:stream deploy cf-syslog2 --properties "deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false, deployer.*.cloudfoundry.env='JAVA_OPTS=\\'-Xmx64m -Xms64m\\'', deployer.*.disk=512, deployer.*.memory=256"
+1718396881793:quit
+1718397549916:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1718397550302:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1718397553348:quit
+1718398468361:stream list
+1720461148071:stream destroy --name mysyslog
+1720461152786:stream destroy --name test
+1720461155672:quit
+1720461328925:stream create --name tpcfsyslog --definition "syslog --rfc=5424 --port=51000 > : tpcfsyslog"
+1720461329415:stream deploy tpcfsyslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1720461333693:quit
+1720461395917:stream list
+1720461504035:quit
+1720461980636:streams list
+1720461983521:stream list
+1720461990712:stream destroy -name uaa
+1720461997522:stream destroy --name uaa
+1720462007599:stream destroy --name tpcfsyslog
+1720462010173:quit
+1720463940725:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1720463941205:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1720463949905:quit
+1720464047858:stream create --name "iptables-logger-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==iptables-logger > :iptables-logger-syslog"
+1720464048436:stream deploy "iptables-logger-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1720464255609:stream list
+1720464292259:sstream create --name test --definition ":iptables-logger-syslog > log" --deploy
+1720464308908:stream create --name test --definition ":iptables-logger-syslog > log"
+1720464315323:stream deploy test
+1720464328727:quit
+1720464672584:stream list
+1720464715903:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==uaa > :uaa-syslog"
+1720464716361:stream deploy "uaa-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1720464794764:stream list
+1720464800569:dstream destroy --name cf-syslog
+1720464805350:stream destroy --name cf-syslog
+1720464810490:stream destroy --name test
+1720464812402:stream list
+1720464818996:stream destroy --name uaa-syslog
+1720464833609:stream list
+1720464844017:stream destroy iptables-logger-syslog
+1720464848110:quit
+1720465803844:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1720465804430:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1720465809640:quit
+1720465851708:stream create --name appNames --definition ":cf-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_APP_NAME') | file --file.mode=APPEND --file.directory=/home/vcap/files/"
+1720466124388:stream create --name test --definition ":cf-syslog > log"
+1720471973875:stream list
+1720472113830:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload, '$.syslog_APP_NAME')==uaa > :uaa-syslog"
+1720472165895:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload, '$.syslog_APP_NAME')==uaa > :uaa-syslog\n"
+1720472185223:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload, '$.syslog_APP_NAME')==uaa > :uaa-syslog"
+1720472238777:stream list
+1720472268117:stream create --name "uaa-syslog" --definition ":cf-syslog > log"
+1720472275575:stream destroy --name uaa-syslog
+1720472322106:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==uaa > :uaa-syslog"
+1720472556192:streams list
+1720472558147:stream list
+1720472662308:stream destroy uaa-syslog
+1720472729256:stream list
+1720473053556:stream destroy --name x
+1720477314771:stream create --name "uaa-syslog"      --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='uaa' > :uaa-syslog"
+1720477315325:stream create --name "gorouter-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='gorouter' > :gorouter-syslog"
+1720477315665:stream create --name "uaa-test"        --definition ":uaa-syslog > log"
+1720477365787:stream create --name "uaa-syslog"      --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='uaa' > :uaa-syslog"
+1720477366266:stream create --name "gorouter-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='gorouter' > :gorouter-syslog"
+1720477366556:stream create --name "uaa-test"        --definition ":uaa-syslog > log"
+1720477366843:stream create --name "gorouter-test"   --definition ":gorouter-syslog > log"
+1720478384941:stream create --name "tas-syslog" --definition "syslog --rfc=5424 --port=51000 > :tas-syslog" --deploy
+1720478387629:stream create --name "tas-syslog-tester" --definition ":tas-syslog > log" --deploy
+1720478390591:stream create --name "tas-cc-syslog" --definition ":tas-syslog  > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='cloud_controller_ng' > :tas-cc-syslog" --deploy
+1720478394101:stream create --name "tas-cc-syslog-tester" --definition ":tas-cc-syslog > log" --deploy
+1720478396868:stream create --name "tas-cc-transform" --definition ":tas-cc-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_MESSAGE') | log" --deploy
+1720524682253:stream list
+1720813996107:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 | log"
+1720813996749:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1720814007658:quit
+1720816377732:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1720816378167:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1720816380821:quit
+1720817448762:stream create --name "uaa-syslog"      --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='uaa' > :uaa-syslog"
+1720817466408:stream create --name uaatest --definition ":uaa-syslog > log"
+1720818493657:stream list
+1720818570856:stream create --name "uaa-syslog2" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')='uaa' > :uaa-syslog"
+1721069742964:stream list
+1721069744936:stream destroy all
+1721069749379:stream destroy --all
+1721069756579:stream destroy c2u
+1721069760327:stream destroy cf-syslog
+1721069764399:stream- destroy uaatest
+1721069767020:stream list
+1721069773238:stream destroy --name=uaatest
+1721069779698:stream destroy --name uaatest
+1721069781508:stream list
+1721069783175:quit
+1721077807921:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1721077808625:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1721077816534:quit
+1721674555212:stream list
+1721674610883:quit
+1721674652477:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1721674653061:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1721674659635:quit
+1721679610436:stream list
+1721679639357:stream
+1721679641484:help
+1721679825120:stream create --name "cf-apps-list" --definition ":cf-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_APP_NAME')  > file --file.mode=APPEND --file.directory=/tmp/logs"
+1721679832241:stacktrace
+1721679858405:tream create --name "cf-apps-list" --definition ":cf-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_APP_NAME') | file --file.mode=APPEND --file.directory=/tmp/logs"
+1721679867794:stream create --name "cf-apps-list" --definition ":cf-syslog > transform --transformer.expression=#jsonPath(payload,'.syslog_APP_NAME') | file --file.mode=APPEND --file.directory=/tmp/logs"
+1721679872195:stream list
+1721679878033:stream deploy cf-apps-list
+1721680081458:stream destroy cf-apps-list
+1721680189725:stream list
+1721743540578:quit
+1721743633041:stream destroy appnamestest
+1721743642301:stream destroy cf-syslog cf2uaa
+1721743648269:stream destroy cf2uaa
+1721743652898:stream destroy cfsyslogtest
+1721743657194:stream list
+1721743659150:quit
+1721745569123:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1721745569783:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1721745575614:quit
+1721745863841:stream create --name cftest --definition ":cf-syslog > log"
+1721745864383:stream deploy cftest
+1721746486701:stream destroy cftest
+1721746861735:stream create --name cf-test --definition ":cf-syslog > log"
+1721746862436:stream deploy cf-test
+1721746938676:stream create --name cf-test --definition ":cf-syslog > log"
+1721746939069:stream deploy cf-test
+1721747116764:stream create --name cf-test --definition ":cf-syslog > log"
+1721747117139:stream deploy cf-test
+1721747302407:stream create --name cf-test --definition ":cf-syslog > log"
+1721747373170:stream create --name cf-test --definition ":cf-syslog > log"\\nquit\\n
+1721747623172:stream list \\nquit\\n
+1721748073154:quit
+1721748161403:stream list
+1721748318435:stream destroy cf-test
+1721748360193:quit
+1721748412750:stream list
+1721748413269:quit
+1721748850122:stream list
+1721748850614:quit
+1721748875004:stream list
+1721748875391:quit
+1721749118998:stream list
+1721749119511:quit
+1721749222152:stream list
+1721749222550:stream create --name cf-test --definition :cf-syslog > log
+1721749222563:stream deploy cf-test
+1721749222930:stream list
+1721749223272:quit
+1721749281306:stream list
+1721749281824:stream create --name "cf-test" --definition ":cf-syslog > log"
+1721749282118:stream deploy "cf-test"
+1721749285448:stream list
+1721749285785:quit
+1721749415477:stream list
+1721749415979:stream create --name "cf-test" --definition ":cf-syslog > log"
+1721749416302:stream deploy "cf-test"
+1721749418762:stream list
+1721749419147:quit
+1721749834166:stream list
+1721749834545:stream create --name "cf-test" --definition ":cf-syslog > log"
+1721749834882:stream deploy "cf-test"
+1721749837185:stream list
+1721749837562:quit
+1721749863587:stream list
+1721749864133:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME').equals('uaa') > :uaa-syslog"
+1721749864533:stream deploy "uaa-syslog"
+1721749871346:stream list
+1721749871782:quit
+1721749890792:stream list
+1721749891283:stream create --name "uaa-test" --definition ":uaa-syslog > log"
+1721749891717:stream deploy "uaa-test"
+1721749893202:stream list
+1721749893752:quit
+1721756672520:stream list
+1721756672921:stream create --name "cf-test" --definition ":cf-syslog > log"
+1721756673206:stream deploy "cf-test"
+1721756673955:stream list
+1721756674261:quit
+1721756727411:stream list
+1721756727824:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1721756728183:stream deploy "uaa-syslog"
+1721756730588:stream list
+1721756731035:quit
+1721756756518:stream list
+1721756756977:stream create --name "uaa-test" --definition ":uaa-syslog > log"
+1721756757714:stream deploy "uaa-test"
+1721756761239:stream list
+1721756762201:quit
+1721757008100:stream list
+1721757008508:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1721757008853:stream deploy "uaa-syslog"
+1721757011707:stream list
+1721757012113:quit
+1721757262093:stream list
+1721757262471:stream create --name "cf-test" --definition ":cf-syslog > log"
+1721757262742:stream deploy "cf-test"
+1721757263763:stream list
+1721757264045:quit
+1721757403589:stream list
+1721757404430:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1721757404817:stream deploy "uaa-syslog"
+1721757407292:stream list
+1721757407679:quit
+1721757427123:stream list
+1721757427556:stream create --name "uaa-test" --definition ":uaa-syslog > log"
+1721757427963:stream deploy "uaa-test"
+1721757432047:stream list
+1721757432491:quit
+1721757640008:stream list
+1721757640372:stream list
+1721757640525:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1721757640984:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1721757641022:stream deploy "uaa-syslog"
+1721757641437:stream deploy "uaa-syslog"
+1721757642075:stream list
+1721757642488:quit
+1721757644916:stream list
+1721757645254:quit
+1721757819060:stream list
+1721757819591:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1721757819957:stream deploy "uaa-syslog"
+1721757823648:stream list
+1721757824015:quit
+1721757836977:stream list
+1721757837425:stream create --name "uaa-test" --definition ":uaa-syslog > log"
+1721757837759:stream deploy "uaa-test"
+1721757840829:stream list
+1721757841370:quit
+1721758225067:stream list
+1721758225490:stream create --name "appnames-list" --definition ":cf-syslog > transform --expression=#jsonPath(payload,'.syslog_APP_NAME') > file --directory=/tmp/logs --mode=APPEND :input<:transform.output"
+1721758225750:stream deploy "appnames-list"
+1721758226030:stream list
+1721758226354:quit
+1721758257604:stream list
+1721758258041:stream create --name "appnames-list" --definition ":cf-syslog > transform --expression=#jsonPath(payload,'.syslog_APP_NAME') | file --directory=/tmp/logs --mode=APPEND :input<:transform.output"
+1721758258331:stream deploy "appnames-list"
+1721758263852:stream list
+1721758264422:quit
+1721761094186:stream list
+1721761094782:stream create --name "iptables-logger-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''iptables-logger'')' > :iptables-logger-syslog"
+1721761095145:stream deploy "iptables-logger-syslog"
+1721761099841:stream list
+1721761100287:quit
+1721761115849:stream list
+1721761116407:stream create --name "iptables-logger-test" --definition ":iptables-logger-syslog > log"
+1721761116790:stream deploy "iptables-logger-test"
+1721761120923:stream list
+1721761121454:quit
+1721763859153:stream list
+1721763860633:stream create --name "iptables-logger-transform" --definition ":iptables-logger-syslog > groovy --script=https://groovyfilter.homelab.fynesy.com/screen.groovy :egress-logs"
+1721763861014:stream deploy "iptables-logger-transform"
+1721763861395:stream list
+1721763861898:quit
+1721763876801:stream list
+1721763877436:stream create --name "iptables-logger-transform-test" --definition ":egress-logs > log"
+1721763877875:stream deploy "iptables-logger-transform-test"
+1721763884232:stream list
+1721763899392:stream create --name "iptables-logger-transform" --definition ":iptables-logger-syslog > groovy --script=https://groovyfilter.homelab.fynesy.com/screen.groovy > :egress-logs"
+1721763900069:stream deploy "iptables-logger-transform"
+1721763906433:stream list
+1721763907079:quit
+1721763936262:stream list
+1721763936979:stream create --name "iptables-logger-transform-test" --definition ":egress-logs > log"
+1721763937439:stream deploy "iptables-logger-transform-test"
+1721763940617:stream list
+1721763941276:quit
+1721764388146:stream list
+1721764388735:stream create --name "iptables-logger-test" --definition ":iptables-logger-syslog > log"
+1721764389125:stream deploy "iptables-logger-test"
+1721764395021:stream list
+1721764395730:quit
+1721765596666:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1721765597075:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1721765599556:quit
+1721765832101:stream list
+1721765832485:stream list
+1721765833028:stream create --name "cf-test" --definition ":cf-syslog > log"
+1721765833077:stream create --name "cf-test" --definition ":cf-syslog > log"
+1721765833435:stream deploy "cf-test"
+1721765833513:stream deploy "cf-test"
+1721765837334:stream list
+1721765837358:stream list
+1721765838181:quit
+1721765838287:quit
+1721765854186:stream list
+1721765854717:stream create --name "iptables-logger-test" --definition ":iptables-logger-syslog > log"
+1721765855265:stream deploy "iptables-logger-test"
+1721765857266:stream list
+1721765857693:quit
+1721765874918:stream list
+1721765875684:stream create --name "iptables-logger-transform" --definition ":iptables-logger-syslog > groovy --script=https://groovyfilter.homelab.fynesy.com/screen.groovy > :egress-logs"
+1721765876278:stream deploy "iptables-logger-transform"
+1721765881121:stream list
+1721765881870:quit
+1721765900593:stream list
+1721765901357:stream create --name "iptables-logger-transform-test" --definition ":egress-logs > log"
+1721765902073:stream deploy "iptables-logger-transform-test"
+1721765904965:stream list
+1721765905938:quit
+1721766225119:stream list
+1721766225772:stream create --name "iptables-logger-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''iptables\\-logger'')' > :iptables-logger-syslog"
+1721766226356:stream deploy "iptables-logger-syslog"
+1721766230076:stream list
+1721766230491:quit
+1722008906764:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1722008907318:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1722008913871:quit
+1722009109719:stream list
+1722009264353:quit
+1722009283640:stream list
+1722009283826:stream list
+1722009284355:stream create --name "cf-test" --definition ":cf-syslog > log"
+1722009284355:stream create --name "cf-test" --definition ":cf-syslog > log"
+1722009284782:stream deploy "cf-test"
+1722009284819:stream deploy "cf-test"
+1722009288670:stream list
+1722009288716:stream list
+1722009289160:quit
+1722009289212:quit
+1722009302718:stream list
+1722009303134:stream create --name "uaa-test" --definition ":uaa-syslog > log"
+1722009303644:stream deploy "uaa-test"
+1722009311210:stream list
+1722009311681:quit
+1722009325175:stream list
+1722009325665:stream create --name "iptables-logger-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''iptables\\-logger'')' > :iptables-logger-syslog"
+1722009326037:stream deploy "iptables-logger-syslog"
+1722009331154:stream list
+1722009331786:quit
+1722009347137:stream list
+1722009348617:stream create --name "iptables-logger-test" --definition ":iptables-logger-syslog > log"
+1722009349052:stream deploy "iptables-logger-test"
+1722009351582:stream list
+1722009352368:quit
+1722009368284:stream list
+1722009369129:stream create --name "iptables-logger-transform" --definition ":iptables-logger-syslog > groovy --script=https://groovyfilter.homelab.fynesy.com/screen.groovy > :egress-logs"
+1722009369714:stream deploy "iptables-logger-transform"
+1722009383576:stream list
+1722009384892:quit
+1722009403691:stream list
+1722009404860:stream create --name "iptables-logger-transform-test" --definition ":egress-logs > log"
+1722009405575:stream deploy "iptables-logger-transform-test"
+1722009412386:stream list
+1722009413628:quit
+1722009759706:stream list
+1722009761092:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1722009761594:stream deploy "uaa-syslog"
+1722009767150:stream list
+1722009767935:quit
+1722011130438:stream list
+1722011137724:stream destroy iptables-logger-transform-test
+1722011146197:stream destroy iptables-logger-transform
+1722011175781:stream list
+1722011192996:stream destroy iptables-logger-syslog
+1722011197449:stream destory iptables-logger-test
+1722011203052:stream destroy iptables-logger-test
+1722011205673:stream list
+1722011216000:stream destroy uaa-test
+1722011224664:stream destroy uaa-syslog
+1722011228319:stream destroy cf-test
+1722011230738:stream list
+1722011507326:quit
+1722014147468:stream list
+1722014147504:stream list
+1722014148081:stream create --name "cf-test" --definition ":cf-syslog > log"
+1722014148082:stream create --name "cf-test" --definition ":cf-syslog > log"
+1722014148495:stream deploy "cf-test"
+1722014148512:stream deploy "cf-test"
+1722014149562:stream list
+1722014150151:quit
+1722014152907:stream list
+1722014153400:quit
+1722014163624:stream list
+1722014164024:stream create --name "uaa-test" --definition ":uaa-syslog > log"
+1722014164349:stream deploy "uaa-test"
+1722014166702:stream list
+1722014167079:quit
+1722014180424:stream list
+1722014180852:stream create --name "auth-failures-syslog" --definition ":uaa-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_MESSAGE'').contains(''PrincipalAuthenticationFailure'')' > :auth-failures-syslog"
+1722014181172:stream deploy "auth-failures-syslog"
+1722014185913:stream list
+1722014186364:quit
+1722014201431:stream list
+1722014201928:stream create --name "auth-failures-test" --definition ":auth-failures-syslog > log"
+1722014202302:stream deploy "auth-failures-test"
+1722014206219:stream list
+1722014206722:quit
+1722014343730:stream list
+1722014344457:quit
+1722014634550:stream list
+1722014635507:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1722014635926:stream deploy "uaa-syslog"
+1722014640411:stream list
+1722014640971:quit
+1722016046468:stream list
+1722016047308:stream create --name "kernel-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''kernel'')' > :kernel-syslog"
+1722016047629:stream deploy "kernel-syslog"
+1722016050843:stream list
+1722016051266:quit
+1722016066915:stream list
+1722016067428:stream create --name "kernel-test" --definition ":kernel-syslog > log"
+1722016067842:stream deploy "kernel-test"
+1722016072363:stream list
+1722016072837:quit
+1722016587322:stream list
+1722016587843:stream create --name "kernel-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''kernel'')' > :kernel-syslog-message"
+1722016588166:stream deploy "kernel-syslog"
+1722016591676:stream list
+1722016592179:quit
+1722016606626:stream list
+1722016607520:stream create --name "kernel-message-test" --definition ":kernel-syslog-message > log"
+1722016607895:stream deploy "kernel-message-test"
+1722016612952:stream list
+1722016613463:quit
+1722016840149:stream list
+1722016840734:stream destroy kernel-syslog
+1722016846587:stream destroy kernel-message-test
+1722016860746:quit
+1722016870520:stream list
+1722016871364:stream create --name "kernel-syslog-message" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''kernel'')' > transform --expression=#jsonPath(payload,'.syslog_MESSAGE') > :kernel-syslog-message"
+1722016871655:stream deploy "kernel-syslog-message"
+1722016871952:stream list
+1722016872286:quit
+1722016886048:stream list
+1722016886519:stream create --name "kernel-message-test" --definition ":kernel-syslog-message > log"
+1722016886850:stream deploy "kernel-message-test"
+1722016890481:stream list
+1722016890992:quit
+1722016979101:stream list
+1722016979657:stream create --name "kernel-syslog-message" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''kernel'')' > transform --expression=#jsonPath(payload,'.syslog_MESSAGE') > :kernel-syslog-message"
+1722016979975:stream deploy "kernel-syslog-message"
+1722016980267:stream list
+1722016980664:quit
+1722017056175:stream list
+1722017057042:stream create --name "kernel-syslog-message" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''kernel'')' | transform --expression=#jsonPath(payload,'.syslog_MESSAGE') > :kernel-syslog-message"
+1722017057386:stream deploy "kernel-syslog-message"
+1722017064889:stream list
+1722017065634:quit
+1722017236240:stream list
+1722017246533:stream destroy kernel-syslog-message
+1722017269358:quit
+1722017279474:stream list
+1722017279939:stream create --name "kernel-syslog-message" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''kernel'')' | transform --expression=#jsonPath(payload,'.syslog_MESSAGE') > :kernel-syslog-message"
+1722017280257:stream deploy "kernel-syslog-message"
+1722017285980:stream list
+1722017286657:quit
+1722017802612:stream list
+1722017807858:stream destroy kernel-syslog-message
+1722017810385:stream list
+1722017818148:exit
+1722017846768:stream list
+1722017847502:stream create --name "kernel-syslog-message" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''kernel'')' | transform --expression=#jsonPath(payload,'.syslog_MESSAGE') | filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').contains(''PROTO'')' > :kernel-syslog-message"
+1722017847940:stream deploy "kernel-syslog-message"
+1722017848422:stream list
+1722017849022:quit
+1722018010146:stream list
+1722018015685:quit
+1722018028566:stream list
+1722018029625:stream create --name "kernel-syslog-message" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''kernel'')' | transform --expression=#jsonPath(payload,'.syslog_MESSAGE') | filter --name=egress-logs-only --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').contains(''PROTO'')' > :kernel-syslog-message"
+1722018030142:stream deploy "kernel-syslog-message"
+1722018030572:stream list
+1722018031107:quit
+1722018466182:stream list
+1722018467920:stream create --name "kernel-syslog-message" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''kernel'')' | transform --expression=#jsonPath(payload,'.syslog_MESSAGE') | egress:filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').contains(''PROTO'')' > :kernel-syslog-message"
+1722018468357:stream deploy "kernel-syslog-message"
+1722018468740:stream list
+1722018469296:quit
+1722018493383:stream create -h
+1722018526342:stream create
+1722018527860:help
+1722018535072:stream
+1722018540946:help stream create
+1722018581850:quit
+1722020092457:stream list
+1722020098138:stream destroy kernel-message-test
+1722020101556:quit
+1722020113702:stream list
+1722020114317:stream create --name "egress-syslog-message" --definition "kernel-syslog: filter --expression=#jsonPath(payload,'$.syslog_APP_NAME').equals('kernel') :input<:cf-syslog || kernel-syslog-message: transform --expression=#jsonPath(payload,'.syslog_MESSAGE') :input<:kernel-syslog.output || egress-syslog-message: filter --expression=#jsonPath(payload,'$.syslog_APP_NAME').contains('PROTO') :input<:kernel-syslog-message.output || log :input<:egress-syslog-message.output"
+1722020114791:stream deploy "egress-syslog-message"
+1722020132318:stream list
+1722020132998:quit
+1722021667866:stream list
+1722021674706:stream destroy  egress-syslog-message
+1722021712783:stream list
+1722022284753:quit
+1722022297565:stream list
+1722022298919:stream create --name "kernel-syslog-message" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''kernel'')' | transform --expression=#jsonPath(payload,'.syslog_MESSAGE') | egress:filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').contains(''PROTO'')' > :kernel-syslog-message"
+1722022299477:stream deploy "kernel-syslog-message"
+1722022300005:stream list
+1722022300573:quit
+1722022315450:stream list
+1722022316040:stream create --name "kernel-message-test" --definition ":kernel-syslog-message > log"
+1722022316512:stream deploy "kernel-message-test"
+1722022320466:stream list
+1722022321089:quit
+1722023039732:stream list
+1722023040056:stream create --name "cf-test" --definition ":cf-syslog > log"
+1722023040347:stream deploy "cf-test"
+1722023042875:stream list
+1722023043701:quit
+1722023082569:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > : cf-syslog"
+1722023082965:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1722023085940:quit
+1722023537430:stream list
+1722023537998:stream create --name "cf-test" --definition ":cf-syslog > log"
+1722023538273:stream deploy "cf-test"
+1722023539120:stream list
+1722023539412:quit
+1722023552220:stream list
+1722023552670:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1722023552994:stream deploy "uaa-syslog"
+1722023556799:stream list
+1722023557275:quit
+1722023571450:stream list
+1722023571993:stream create --name "uaa-test" --definition ":uaa-syslog > log"
+1722023572335:stream deploy "uaa-test"
+1722023575843:stream list
+1722023576319:quit
+1722023591221:stream list
+1722023591750:stream create --name "auth-failures-syslog" --definition ":uaa-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_MESSAGE'').contains(''PrincipalAuthenticationFailure'')' > :auth-failures-syslog"
+1722023592142:stream deploy "auth-failures-syslog"
+1722023595349:stream list
+1722023595954:quit
+1722023612525:stream list
+1722023613103:stream create --name "auth-failures-test" --definition ":auth-failures-syslog > log"
+1722023613701:stream deploy "auth-failures-test"
+1722023616147:stream list
+1722023616597:quit
+1722024336775:stream list
+1722024338104:stream create --name "cf-test" --definition ":cf-syslog > log"
+1722024338584:stream deploy "cf-test"
+1722024340250:stream list
+1722024340875:quit
+1722024357120:stream list
+1722024357698:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1722024358038:stream deploy "uaa-syslog"
+1722024359598:stream list
+1722024360055:quit
+1722024377034:stream list
+1722024377720:stream create --name "uaa-test" --definition ":uaa-syslog > log"
+1722024378183:stream deploy "uaa-test"
+1722024380036:stream list
+1722024381033:quit
+1722024398803:stream list
+1722024405051:stream create --name "auth-failures-syslog" --definition ":uaa-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_MESSAGE'').contains(''PrincipalAuthenticationFailure'')' > :auth-failures-syslog"
+1722024405925:stream deploy "auth-failures-syslog"
+1722024409192:stream list
+1722024410195:quit
+1722024433408:stream list
+1722024434303:stream create --name "auth-failures-test" --definition ":auth-failures-syslog > log"
+1722024434927:stream deploy "auth-failures-test"
+1722024438004:stream list
+1722024439069:quit
+1722024460169:stream list
+1722024463765:stream create --name "iptables-logger-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''iptables\\-logger'')' > :iptables-logger-syslog"
+1722024464540:stream deploy "iptables-logger-syslog"
+1722024473596:stream list
+1722024475040:quit
+1722024499640:stream list
+1722024500809:stream create --name "iptables-logger-test" --definition ":iptables-logger-syslog > log"
+1722024502122:stream deploy "iptables-logger-test"
+1722024519271:stream list
+1722024521420:quit
+1722024559523:stream list
+1722024561991:stream create --name "kernel-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''kernel'')' > :kernel-syslog"
+1722024562836:stream deploy "kernel-syslog"
+1722024568613:stream list
+1722024569570:quit
+1722024594063:stream list
+1722024595253:stream create --name "kernel-test" --definition ":kernel-syslog > log"
+1722024596017:stream deploy "kernel-test"
+1722024602667:stream list
+1722024605652:quit
+1722024641448:stream list
+1722024642904:stream create --name "cf-test" --definition ":cf-syslog > log"
+1722024644037:stream deploy "cf-test"
+1722024663488:stream list
+1722024664839:quit
+1722024703630:stream list
+1722024704825:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1722024705594:stream deploy "uaa-syslog"
+1722024713087:stream list
+1722024714405:quit
+1722024742591:stream list
+1722024743604:stream create --name "uaa-test" --definition ":uaa-syslog > log"
+1722024744248:stream deploy "uaa-test"
+1722024747761:stream list
+1722024748704:quit
+1722024769006:stream list
+1722024772661:stream create --name "auth-failures-syslog" --definition ":uaa-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_MESSAGE'').contains(''PrincipalAuthenticationFailure'')' > :auth-failures-syslog"
+1722024773397:stream deploy "auth-failures-syslog"
+1722024778115:stream list
+1722024779434:quit
+1722024805981:stream list
+1722024807325:stream create --name "auth-failures-test" --definition ":auth-failures-syslog > log"
+1722024808167:stream deploy "auth-failures-test"
+1722024812391:stream list
+1722024813685:quit
+1722024839403:stream list
+1722024842064:stream create --name "iptables-logger-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''iptables\\-logger'')' > :iptables-logger-syslog"
+1722024842675:stream deploy "iptables-logger-syslog"
+1722024846392:stream list
+1722024847092:quit
+1722024868718:stream list
+1722024869990:stream create --name "iptables-logger-test" --definition ":iptables-logger-syslog > log"
+1722024870696:stream deploy "iptables-logger-test"

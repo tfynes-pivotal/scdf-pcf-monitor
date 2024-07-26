@@ -1,0 +1,41 @@
+// dataflow 1.2.0.RELEASE log opened at 2019-08-02 14:06:09
+app import https://dataflow.spring.io/rabbitmq-maven-latest
+stream create --name "PAS-CONNECTOR" --definition "syslog --rfc=5424 --port=51514 > :PAS-SYSLOG" --deploy
+stream create --name "TEST-PAS-SYSLOG" --definition ":PAS-SYSLOG > log" --deploy
+stream list
+quit
+// dataflow 1.2.0.RELEASE log closed at 2019-08-02 14:08:11
+// dataflow 1.2.0.RELEASE log opened at 2019-08-02 14:09:56
+stream list
+// dataflow 1.2.0.RELEASE log opened at 2019-08-02 14:11:49
+stream create --name "PAS-UAA-SYSLOG" --definition ":PAS-SYSLOG  > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='uaa' > :PAS-UAA-SYSLOG" --deploy
+stream create --name "TEST-PAS-UAA-SYSLOG" --definition ":PAS-UAA-SYSLOG > log" --deploy
+stream list
+stream destroy TEST-PAS-SYSLOG
+stream list
+clear
+stream create --name "PAS-KERNEL-SYSLOG-MESSAGE" --definition ":PAS-KERNEL-SYSLOG > transform --transformer.expression=#jsonPath(payload,'.syslog_MESSAGE') > :PAS-KERNEL-SYSLOG-MESSAGE" --deploy
+stream create --name "TEST-PAS-KERNEL-SYSLOG-MESSAGE" --definition ":PAS-KERNEL-SYSLOG-MESSAGE > log" --deploy
+stream list
+stream destroy TEST-PAS-UAA-SYSLOG
+stream list
+stream create --name "PAS-KERNEL-SYSLOG" --definition ":PAS-SYSLOG  > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='kernel' > :PAS-KERNEL-SYSLOG" --deploy
+stream destroy PAS-UAA-SYSLOG
+stream list
+quit
+// dataflow 1.2.0.RELEASE log closed at 2019-08-02 14:26:09
+// dataflow 1.2.0.RELEASE log opened at 2020-06-02 14:33:42
+stream list
+stream destroy --name FirehoseSource2
+// dataflow 1.2.0.RELEASE log opened at 2020-06-02 14:48:12
+stream list
+stream list
+// dataflow 1.2.0.RELEASE log opened at 2020-06-02 15:03:38
+stream list
+quit
+// dataflow 1.2.0.RELEASE log closed at 2020-06-02 15:04:52
+// dataflow 1.2.0.RELEASE log opened at 2020-09-10 15:36:02
+stream list
+// [failed] stream create --name "TAS-CONNECTOR" --definition "syslog --rfc=5424 --port=60001 > :TAS-SYSLOG" --deploy
+exit
+// dataflow 1.2.0.RELEASE log closed at 2020-09-10 15:38:39

@@ -1,0 +1,11 @@
+STREAM_1=filter --expression=#jsonPath(payload,'.syslog_APP_NAME')=='iptables-logger' :input<:cf-syslog :output>:iptables-logger-syslog
+file --directory=/tmp/ --name=foo --mode=APPEND :input<:STREAM_1.filter.output
+STREAM_3=transform --expression=#jsonPath(payload,'.syslog_MESSAGE') :input<:iptables-logger-syslog || file --directory=/tmp/ --name=foo --mode=APPEND :input<:transform.output
+log :input<:STREAM_3.transform.output
+log :input<:STREAM_1.filter.output
+
+
+
+uaa: filter --expression=#jsonPath(payload,'.syslog_APP_NAME')=='uaa' :input<:cf-syslog :output>:uaa-syslog
+ssh-proxy: filter --expression=#jsonPath(payload,'.syslog_APP_NAME')=='ssh_proxy' :input<:cf-syslog :output>:ssh-proxy-syslog
+iptables-logger: filter --expression=#jsonPath(payload,'.syslog_APP_NAME')=='iptables-logger' :input<:cf-syslog :output>:iptables-logger-syslog

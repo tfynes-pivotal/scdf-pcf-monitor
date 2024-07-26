@@ -1,0 +1,9 @@
+
+cf dfsh ds1 <<EOF
+stream create --name testa --definition "syslog --syslog.rfc=5424 --syslog.port=51001 | log"
+stream deploy testa --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+quit
+EOF
+echo
+sleep 20
+cf apps | grep testa | grep syslog

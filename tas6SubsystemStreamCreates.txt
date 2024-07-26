@@ -1,0 +1,114 @@
+stream create --name "CRON-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==CRON > :CRON-syslog"
+stream deploy "CRON-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "anacron-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==anacron > :anacron-syslog"
+stream deploy "anacron-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "auctioneer-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==auctioneer > :auctioneer-syslog"
+stream deploy "auctioneer-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "audisp-syslog-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==audisp-syslog > :audisp-syslog-syslog"
+stream deploy "audisp-syslog-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "bbs-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==bbs > :bbs-syslog"
+stream deploy "bbs-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "blobstore-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==blobstore > :blobstore-syslog"
+stream deploy "blobstore-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "cc_deployment_updater-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==cc_deployment_updater > :cc_deployment_updater-syslog"
+stream deploy "cc_deployment_updater-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "cc_uploader-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==cc_uploader > :cc_uploader-syslog"
+stream deploy "cc_uploader-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "cloud_controller_clock-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==cloud_controller_clock > :cloud_controller_clock-syslog"
+stream deploy "cloud_controller_clock-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "cloud_controller_ng-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==cloud_controller_ng > :cloud_controller_ng-syslog"
+stream deploy "cloud_controller_ng-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "cluster-health-logger-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==cluster-health-logger > :cluster-health-logger-syslog"
+stream deploy "cluster-health-logger-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "file_server-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==file_server > :file_server-syslog"
+stream deploy "file_server-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "garden-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==garden > :garden-syslog"
+stream deploy "garden-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "gorouter-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==gorouter > :gorouter-syslog"
+stream deploy "gorouter-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "iptables-logger-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==iptables-logger > :iptables-logger-syslog"
+stream deploy "iptables-logger-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "kernel-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==kernel > :kernel-syslog"
+stream deploy "kernel-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "loggr-syslog-agent-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==loggr-syslog-agent > :loggr-syslog-agent-syslog"
+stream deploy "loggr-syslog-agent-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "mysql-metrics-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==mysql-metrics > :mysql-metrics-syslog"
+stream deploy "mysql-metrics-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "networkctl-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==networkctl > :networkctl-syslog"
+stream deploy "networkctl-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "networkd-dispatcher-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==networkd-dispatcher > :networkd-dispatcher-syslog"
+stream deploy "networkd-dispatcher-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "policy-server-asg-syncer-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==policy-server-asg-syncer > :policy-server-asg-syncer-syslog"
+stream deploy "policy-server-asg-syncer-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "prom_scraper-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==prom_scraper > :prom_scraper-syslog"
+stream deploy "prom_scraper-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "rep-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==rep > :rep-syslog"
+stream deploy "rep-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "replication-canary-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==replication-canary > :replication-canary-syslog"
+stream deploy "replication-canary-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "route_emitter-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==route_emitter > :route_emitter-syslog"
+stream deploy "route_emitter-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "route_registrar-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==route_registrar > :route_registrar-syslog"
+stream deploy "route_registrar-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "routing-api-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==routing-api > :routing-api-syslog"
+stream deploy "routing-api-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "rsyslogd-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==rsyslogd > :rsyslogd-syslog"
+stream deploy "rsyslogd-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "ssh_proxy-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==ssh_proxy > :ssh_proxy-syslog"
+stream deploy "ssh_proxy-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "sudo-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==sudo > :sudo-syslog"
+stream deploy "sudo-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "syslog_forwarder/blackbox-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==syslog_forwarder/blackbox > :syslog_forwarder/blackbox-syslog"
+stream deploy "syslog_forwarder/blackbox-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "systemd-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==systemd > :systemd-syslog"
+stream deploy "systemd-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "systemd-networkd-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==systemd-networkd > :systemd-networkd-syslog"
+stream deploy "systemd-networkd-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "systemd-udevd-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==systemd-udevd > :systemd-udevd-syslog"
+stream deploy "systemd-udevd-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "tcp_router-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==tcp_router > :tcp_router-syslog"
+stream deploy "tcp_router-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "tps-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==tps > :tps-syslog"
+stream deploy "tps-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==uaa > :uaa-syslog"
+stream deploy "uaa-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
+stream create --name "vcap_nginx_access-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')==vcap_nginx_access > :vcap_nginx_access-syslog"
+stream deploy "vcap_nginx_access-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+

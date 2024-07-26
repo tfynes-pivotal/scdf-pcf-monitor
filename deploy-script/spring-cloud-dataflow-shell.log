@@ -1,0 +1,26 @@
+1717768091479:stream list
+1717768091933:stream destroy testa -f
+1717768097591:stream destroy testb -f
+1717768100571:stream list
+1717768102359:stream destroy test
+1717768104611:stream list
+1717768106803:quit
+1717768158991:stream create --name testa --definition "syslog --syslog.rfc=5424 --syslog.port=51001 | log"
+1717768159369:stream create --name testb --definition "syslog --syslog.rfc=5424 --syslog.port=51002 | log"
+1717768159782:stream deploy testa --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717768165680:stream deploy testb --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717768201332:stream destroy testa -f
+1717768205449:stream destroy testb -f
+1717768208555:stream list
+1717768211015:quit
+1717768272925:stream create --name testa --definition "syslog --syslog.rfc=5424 --syslog.port=51001 | log"
+1717768273293:stream create --name testb --definition "syslog --syslog.rfc=5424 --syslog.port=51002 | log"
+1717768273593:stream deploy testa --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717768279945:stream deploy testb --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717768285648:quit
+1717768320263:stream destroy testa -f
+1717768379404:stream destroy testb -f \\n quit\\n
+1717768491233:stream create --name testa --definition "syslog --syslog.rfc=5424 --syslog.port=51001 | log"
+1717768491642:stream deploy testa --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"
+1717768498047:quit
+1717768926073:quit

@@ -1,0 +1,14 @@
+stream create --name "uaa-syslog"      --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='uaa' > :uaa-syslog"
+stream create --name "gorouter-syslog" --definition ":cf-syslog > filter --filter.expression=#jsonPath(payload,'$.syslog_APP_NAME')=='gorouter' > :gorouter-syslog"
+stream create --name "uaa-test"        --definition ":uaa-syslog > log"
+stream create --name "gorouter-test"   --definition ":gorouter-syslog > log"
+
+
+stream create --name "cf-apps-list" --definition ":cf-syslog > transform --transformer.expression=#jsonPath(payload,'$.syslog_APP_NAME') | file --file.mode=APPEND --file.directory=/tmp/logs" --deploy
+
+
+VVV works VVV
+transform --expression=#jsonPath(payload,'.syslog_APP_NAME') :input<:cf-syslog || file --directory=/tmp/logs --mode=APPEND :input<:transform.output
+
+
+#tail -f ./file-consumer | awk '!a[$0]++'
