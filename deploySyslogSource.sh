@@ -22,12 +22,20 @@ echo
 
 #WIP CF deployer not picking up required env update
 #stream deploy $streamname --properties "deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false, deployer.*.cloudfoundry.env='JAVA_OPTS=\'-Xmx64m -Xms64m\'', deployer.*.disk=512, deployer.*.memory=256"
+
+# stream create --name $streamname --definition "syslog --rfc=5424 --port=$port > : $streamname"
+# --properties "spring.cloud.stream.rabbit.bindings.output.producer.exchangeDurable=false"
+
 cf dfsh $dfservice <<EOF
-stream create --name $streamname --definition "syslog --rfc=5424 --port=$port > : $streamname"
+stream create --name $streamname --definition "syslog --rfc=5424 --port=$port > :$streamname"  
 stream deploy $streamname --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
 quit
 EOF
 echo
+
+
+#stream deploy $streamname --properties "app.*.spring.cloud.stream.rabbit.bindings.input.consumer.durableSubscription=false,app.*.spring.cloud.stream.rabbit.bindings.output.producer.durableSubscription=false,spring.rabbitmq.template.delivery-mode=NON_PERSISTENT,app.*.spring.cloud.stream.rabbit.bindings.output.producer.exchangeDurable=false, deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+
 #echo press any key when syslog source adapter app has started
 #read -n 1 -s
 echo

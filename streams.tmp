@@ -1,5 +1,6 @@
 stream list
-stream create --name "iptables-logger-test" --definition ":iptables-logger-syslog > log"
-stream deploy "iptables-logger-test"
+stream create --name "auth-failures-test" --definition ":auth-failures-syslog > log" 
+stream deploy "auth-failures-test" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+stacktrace
 stream list
 quit
