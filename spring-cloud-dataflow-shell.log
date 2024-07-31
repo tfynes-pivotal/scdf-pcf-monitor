@@ -1584,3 +1584,6 @@
 1722444644890:stream list
 1722448073797:stream destroy uaa-syslog
 1722448075651:stream list
+1722456471230:stream undeploy test
+1722456473390:quit
+1722456738647:stream deploy test
