@@ -51,14 +51,14 @@ echo stream created
 
 #createDeployShrinkStream "cf-test" ":cf-syslog > log" 
 
-#createDeployShrinkStream "uaa-syslog" ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog" 
+createDeployShrinkStream "uaa-syslog" ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog" 
 #createDeployShrinkStream "uaa-test" ":uaa-syslog > log" 
 
 #createDeployShrinkStream "kernel-syslog" ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''kernel'')' > :kernel-syslog" 
 #createDeployShrinkStream "kernel-test" ":kernel-syslog > log" 
 
-createDeployShrinkStream "auth-failures-syslog" ":uaa-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_MESSAGE'').contains(''PrincipalAuthenticationFailure'')' > :auth-failures-syslog" 
-createDeployShrinkStream "auth-failures-test" ":auth-failures-syslog > log" 
+#createDeployShrinkStream "auth-failures-syslog" ":uaa-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_MESSAGE'').contains(''PrincipalAuthenticationFailure'')' > :auth-failures-syslog" 
+#createDeployShrinkStream "auth-failures-test" ":auth-failures-syslog > log" 
 
 #createDeployShrinkStream "iptables-logger-syslog" ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''iptables\-logger'')' > :iptables-logger-syslog" 
 #createDeployShrinkStream "iptables-logger-test" ":iptables-logger-syslog > log" 

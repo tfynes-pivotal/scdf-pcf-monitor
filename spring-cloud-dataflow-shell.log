@@ -1587,3 +1587,154 @@
 1722456471230:stream undeploy test
 1722456473390:quit
 1722456738647:stream deploy test
+1722456962508:quit
+1722456972288:stream list
+1722456973420:stream all destroy
+1722457000319:stream list
+1722457002198:quit
+1722459832858:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > :cf-syslog"
+1722459833367:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1722459838445:quit
+1722459890181:stream list
+1722459890640:stream create --name "cf-test" --definition ":cf-syslog > log"
+1722459890962:stream deploy "cf-test" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722459894144:stacktrace
+1722459894160:stream list
+1722459894745:quit
+1722459903406:stream list
+1722459904174:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1722459904544:stream deploy "uaa-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722459908158:stacktrace
+1722459908178:stream list
+1722459908801:quit
+1722459919011:stream list
+1722459919758:stream create --name "uaa-test" --definition ":uaa-syslog > log"
+1722459920387:stream deploy "uaa-test" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722459925553:stacktrace
+1722459925571:stream list
+1722459926312:quit
+1722459936080:stream list
+1722459936923:stream create --name "auth-failures-syslog" --definition ":uaa-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_MESSAGE'').contains(''PrincipalAuthenticationFailure'')' > :auth-failures-syslog"
+1722459937579:stream deploy "auth-failures-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722459944308:stacktrace
+1722459944322:stream list
+1722459945438:quit
+1722459957700:stream list
+1722459958613:stream create --name "auth-failures-test" --definition ":auth-failures-syslog > log"
+1722459959489:stream deploy "auth-failures-test" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722459969281:stacktrace
+1722459969296:stream list
+1722459970814:quit
+1722460337912:stream list
+1722460462122:stream undeploy cf-syslog
+1722460804701:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > :cf-syslog"
+1722460805331:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1722460808684:quit
+1722461085579:stream list
+1722461167017:stream destroy cf-test
+1722461171392:stream destroy uaa-test
+1722461177417:stream list
+1722461195919:stream undeploy cf-syslog
+1722461205998:stream destroy cf-syslog
+1722461210344:stream list
+1722461605745:stream all destroy
+1722461644961:stream list
+1722461645337:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1722461645684:stream deploy "uaa-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722461648310:stacktrace
+1722461648331:stream list
+1722461649412:quit
+1722461657932:stream list
+1722461658396:stream create --name "auth-failures-syslog" --definition ":uaa-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_MESSAGE'').contains(''PrincipalAuthenticationFailure'')' > :auth-failures-syslog"
+1722461658789:stream deploy "auth-failures-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722461660218:stacktrace
+1722461660238:stream list
+1722461660632:quit
+1722461670442:stream list
+1722461670932:stream create --name "auth-failures-test" --definition ":auth-failures-syslog > log"
+1722461671354:stream deploy "auth-failures-test" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722461674577:stacktrace
+1722461674605:stream list
+1722461675074:quit
+1722461688028:stream list
+1722461811385:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > :cf-syslog"
+1722461811810:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1722461816185:quit
+1722462041727:stream list
+1722462320025:stream create --name "cf-test" --definition ":cf-syslog > log"
+1722462320436:stream deploy "cf-test" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722462325515:stacktrace
+1722462325532:stream list
+1722462326092:quit
+1722462334625:stream list
+1722462335278:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1722462336001:stream deploy "uaa-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722462337536:stacktrace
+1722462337553:stream list
+1722462337997:quit
+1722462346575:stream list
+1722462347186:stream create --name "uaa-test" --definition ":uaa-syslog > log"
+1722462347737:stream deploy "uaa-test" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722462350318:stacktrace
+1722462350338:stream list
+1722462350838:quit
+1722462359979:stream list
+1722462360703:stream create --name "auth-failures-syslog" --definition ":uaa-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_MESSAGE'').contains(''PrincipalAuthenticationFailure'')' > :auth-failures-syslog"
+1722462361211:stream deploy "auth-failures-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722462363036:stacktrace
+1722462363050:stream list
+1722462363600:quit
+1722462372482:stream list
+1722462373274:stream create --name "auth-failures-test" --definition ":auth-failures-syslog > log"
+1722462373853:stream deploy "auth-failures-test" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722462375545:stacktrace
+1722462375569:stream list
+1722462376084:quit
+1722462520546:stream undeploy uaa-test
+1722462524945:stream undeploy cf-test
+1722462533384:stream list
+1722463130470:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > :cf-syslog"
+1722463130858:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1722463133631:quit
+1722463175992:stream all destroy
+1722463185342:clear
+1722463186702:quit
+1722463204662:stream all destroy
+1722463207911:quit
+1722463248791:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > :cf-syslog"
+1722463249223:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1722463251526:quit
+1722463309081:stream list
+1722463309491:stream create --name "auth-failures-syslog" --definition ":uaa-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_MESSAGE'').contains(''PrincipalAuthenticationFailure'')' > :auth-failures-syslog"
+1722463309832:stream deploy "auth-failures-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722463313886:stacktrace
+1722463313901:stream list
+1722463314587:quit
+1722463322100:stream list
+1722463322574:stream create --name "auth-failures-test" --definition ":auth-failures-syslog > log"
+1722463322989:stream deploy "auth-failures-test" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722463326322:stacktrace
+1722463326338:stream list
+1722463326757:quit
+1722464291252:stream lsit
+1722464292783:stream list
+1722464334496:stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog"
+1722464335098:stream deploy "uaa-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+1722464339362:stacktrace
+1722464339384:stream list
+1722464340128:quit
+1722464723256:stream stream all destroy
+1722464726868:quit
+1722464738251:stream list
+1722464739892:stream all destroy
+1722531173195:stream create --name cf-syslog --definition "syslog --rfc=5424 --port=51000 > :cf-syslog"
+1722531174063:stream deploy cf-syslog --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process, deployer.*.cloudfoundry.enable-random-app-name-prefix=false"
+1722531180649:quit
+1722605506228:stream list
+1722605507721:stream destroy cf-syslog
+1722605509811:stream list
+1722605516179:stream destro
+1722605517438:stream list
+1722605519982:stream all destroy
+1722605524818:stream list
+1722605526969:quit

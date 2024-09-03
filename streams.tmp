@@ -1,6 +1,6 @@
 stream list
-stream create --name "auth-failures-test" --definition ":auth-failures-syslog > log" 
-stream deploy "auth-failures-test" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
+stream create --name "uaa-syslog" --definition ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog" 
+stream deploy "uaa-syslog" --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=process"
 stacktrace
 stream list
 quit
