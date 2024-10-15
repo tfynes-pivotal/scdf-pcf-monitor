@@ -44,7 +44,7 @@ echo "syslogappname = $syslogappname"
 
 echo
 echo Invoking port-adder script
-./addAppPort2024.sh $syslogappname $port $space $domain
+./addAppPort.sh $syslogappname $port $space $domain
 
 
 #stream deploy $streamname --properties "deployer.*.memory=1024, deployer.*.cloudfoundry.health-check=HTTP"

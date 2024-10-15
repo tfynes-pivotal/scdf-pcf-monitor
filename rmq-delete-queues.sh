@@ -24,9 +24,11 @@ vhost=$(cf service-key $rmq_si_name sk1 | tail -n +2 | jq -r .credentials.protoc
 echo "vhost $vhost"
 
 echo "/usr/local/sbin/rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost list queues -f raw_json | jq -r .[].name"
-queues=$(/usr/local/sbin/rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost list queues -f raw_json | jq -r .[].name)
+#queues=$(/usr/local/sbin/rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost list queues -f raw_json | jq -r .[].name)
+queues=$(rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost list queues -f raw_json | jq -r .[].name)
 for queue in $queues;
 do
 echo "$queue"
-/usr/local/sbin/rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost  delete queue name=$queue
+#/usr/local/sbin/rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost  delete queue name=$queue
+rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost  delete queue name=$queue
 done

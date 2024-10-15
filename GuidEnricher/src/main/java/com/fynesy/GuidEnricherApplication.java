@@ -39,6 +39,7 @@ public class GuidEnricherApplication {
 	
 	@RequestMapping("/AppGuidToName")
 	public String appGuidToName(@RequestParam(name="guid") String guid) {
+		System.out.println("calling AppGuidToName");
 		if (appGuidCache.containsKey(guid)) {
 			return appGuidCache.get(guid);
 		}
@@ -84,7 +85,7 @@ public class GuidEnricherApplication {
 	}
 	
 	private boolean loggedIn() {
-		String[] commands = {"/bin/bash","-c", 	  "export PATH=$PATH:/home/vcap/app/static && "
+		String[] commands = {"/bin/bash","-c", 	  "export PATH=$PATH:/home/vcap/app/BOOT-INF/classes/static && "
 		+ "cf-linux api " + cfapi + " && "
 		+ "cf-linux target"};
 		String result = runCommand(commands);
@@ -92,7 +93,7 @@ public class GuidEnricherApplication {
 	}
 		
 	private void logIn() {
-		String[] commands = {"/bin/bash","-c", 	  "export PATH=$PATH:/home/vcap/app/static && "
+		String[] commands = {"/bin/bash","-c", 	  "export PATH=$PATH:/home/vcap/app/BOOT-INF/classes/static && "
 				+ "cf-linux api " + cfapi + " && "
 				+ "cf-linux auth " + cfuser + " " + cfpass};
 		String output = runCommand(commands);
@@ -104,7 +105,8 @@ public class GuidEnricherApplication {
 		if (!loggedIn()) {
 			logIn();
 		}
-		String[] fullCommand = {"/bin/bash","-c", "/home/vcap/app/static/cf-linux curl " + curlCommand };
+		String[] fullCommand = {"/bin/bash","-c", "/home/vcap/app/BOOT-INF/classes/static/cf-linux curl " + curlCommand };
+		//String[] fullCommand = {"/bin/bash","-c", "/home/vcap/app/static/cf-linux curl " + curlCommand };
 		String fullCommandOutput = runCommand(fullCommand);
 		return fullCommandOutput;
 

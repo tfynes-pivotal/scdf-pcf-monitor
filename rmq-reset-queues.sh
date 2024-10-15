@@ -23,12 +23,12 @@ echo "rmq_host $rmq_host"
 vhost=$(cf service-key $rmq_si_name sk1 | tail -n +2 | jq -r .credentials.protocols.amqp.vhost)
 echo "vhost $vhost"
 
-echo "/usr/local/sbin/rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost list queues -f raw_json | jq -r .[].name"
-queues=$(/usr/local/sbin/rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost list queues -f raw_json | jq -r .[].name)
+echo "/opt/homebrew/sbin/rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost list queues -f raw_json | jq -r .[].name"
+queues=$(/opt/homebrew/sbin/rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost list queues -f raw_json | jq -r .[].name)
 for queue in $queues;
 do
 echo "$queue"
-/usr/local/sbin/rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost  delete queue name=$queue
-/usr/local/sbin/rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost declare queue name=$queue durable=false arguments='{"x-message-ttl":60000,"x-overflow":"drop-head"}'
+/opt/homebrew/sbin/rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost  delete queue name=$queue
+/opt/homebrew/sbin/rabbitmqadmin --host $rmq_host --port 443 --ssl  -u $rmq_username -p $rmq_password --vhost $vhost declare queue name=$queue durable=false arguments='{"x-message-ttl":60000,"x-overflow":"drop-head"}'
 done
 

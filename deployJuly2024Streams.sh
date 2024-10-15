@@ -37,22 +37,22 @@ cat $tmpfile | cf dfsh $scdf_si_name
 #stream deploy "$streamName" --properties "app.*.spring.cloud.stream.rabbit.bindings.input.consumer.durableSubscription=false,app.*.spring.cloud.stream.rabbit.bindings.output.producer.durableSubscription=false,spring.rabbitmq.template.delivery-mode=NON_PERSISTENT"
 
 echo stream created
-#sleep 5
-#echo shrinking stream app
-#echo appname=$(cf apps | grep $streamName | awk '{print $1}')
+sleep 5
+echo shrinking stream app
+echo appname=$(cf apps | grep $streamName | awk '{print $1}')
 
-#for appname in $(cf apps | grep $streamName | awk '{print $1}')
-#do
-#echo ./shrinkApp.sh $appname
-#./shrinkApp.sh $appname &
-#echo shrink complete
-#done
+for appname in $(cf apps | grep $streamName | awk '{print $1}')
+do
+echo ./shrinkApp.sh $appname
+./shrinkApp.sh $appname &
+echo shrink complete
+done
 }
 
-#createDeployShrinkStream "cf-test" ":cf-syslog > log" 
+createDeployShrinkStream "cf-test" ":cf-syslog > log" 
 
 createDeployShrinkStream "uaa-syslog" ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''uaa'')' > :uaa-syslog" 
-#createDeployShrinkStream "uaa-test" ":uaa-syslog > log" 
+createDeployShrinkStream "uaa-test" ":uaa-syslog > log" 
 
 #createDeployShrinkStream "kernel-syslog" ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''kernel'')' > :kernel-syslog" 
 #createDeployShrinkStream "kernel-test" ":kernel-syslog > log" 
@@ -63,7 +63,7 @@ createDeployShrinkStream "uaa-syslog" ":cf-syslog > filter --filter.function.exp
 #createDeployShrinkStream "iptables-logger-syslog" ":cf-syslog > filter --filter.function.expression='#jsonPath(payload,''$.syslog_APP_NAME'').equals(''iptables\-logger'')' > :iptables-logger-syslog" 
 #createDeployShrinkStream "iptables-logger-test" ":iptables-logger-syslog > log" 
 
-#createDeployShrinkStream "iptables-logger-transform" ":iptables-logger-syslog > groovy --script=https://groovyfilter.homelab.fynesy.com/screen.groovy > :egress-logs" 
+#createDeployShrinkStream "iptables-logger-transform" ":iptables-logger-syslog > groovy --script=https://egressfieldformatter.apps.kite-2819089.cf-app.com/screentemp.groovy > :egress-logs" 
 #createDeployShrinkStream "iptables-logger-transform-test" ":egress-logs > log"
 
 
